@@ -13,9 +13,6 @@ public class Day1B {
                 temp = temp / 3 - 2;
                 if (temp <= 0) temp = 0;
                 sum += temp;
-                System.out.println("Step: " + temp);
-                System.out.println("Sum: " + sum);
-                System.out.println("---------");
             }
         }
         System.out.println(sum);
