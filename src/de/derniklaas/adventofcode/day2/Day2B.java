@@ -6,7 +6,7 @@ public class Day2B {
 
     public static void main(String[] args) {
         String wantedOutput = "19690720";
-        String[] parts = input.split(",");
+        String[] parts;
 
         for (int i = 0; i <= 99; i++) {
             for (int j = 0; j <= 99; j++) {
@@ -41,8 +41,6 @@ public class Day2B {
                     }
                 }
             }
-            parts[1] = "12";
-            parts[2] = "2";
         }
     }
 
