@@ -7,7 +7,7 @@
 ### Check out other solutions
 + Hax's [advent-of-code](https://github.com/Schlauer-Hax/advent-of-code)
 + Trojaner's [AdventofCode](https://github.com/TrojanerHD/AdventofCode)
-+ dejakobniklas' [AdventOfCode](https://github.com/dejakobniklas/AdventOfCode)
++ networkException's [AdventOfCode](https://github.com/dejakobniklas/AdventOfCode)
 + LeMoonStar's [AdventOfCode2019Solutions](https://github.com/LeMoonStar/AdventOfCode2019Solutions)
 + DCDragonCoder's [AdventOfCode2019](https://github.com/DragonCoder01/AdventOfCode2019)
 + joblo2213's [AdventOfCode2019](https://github.com/joblo2213/AdventOfCode2019)
