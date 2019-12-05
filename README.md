@@ -1,8 +1,8 @@
 # Advent of Code 2019
 [![About](https://img.shields.io/badge/Advent%20of%20Code-2019-brightgreen)](https://adventofcode.com/2019/about)
 [![Language](https://img.shields.io/badge/Language-Java-orange)](https://www.java.com/)
-[![Days completed](https://img.shields.io/badge/Days%20completed-4-red)](https://github.com/derNiklaas/Advent-of-Code-2019/tree/master/src/de/derniklaas/adventofcode)
-![Days completed](https://img.shields.io/badge/Stars-8-yellow)
+[![Days completed](https://img.shields.io/badge/Days%20completed-4.5-red)](https://github.com/derNiklaas/Advent-of-Code-2019/tree/master/src/de/derniklaas/adventofcode)
+![Days completed](https://img.shields.io/badge/Stars-9-yellow)
 
 ### Check out other solutions
 + Hax's [advent-of-code](https://github.com/Schlauer-Hax/advent-of-code)
