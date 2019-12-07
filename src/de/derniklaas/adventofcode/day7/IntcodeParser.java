@@ -14,7 +14,7 @@ public class IntcodeParser {
         this.secondinput = secondinput;
     }
 
-    public void setSecondinput(int secondinput) {
+    public void changeSecondInput(int secondInput) {
         this.firstinput = secondinput;
     }
 

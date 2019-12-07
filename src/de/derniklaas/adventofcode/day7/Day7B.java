@@ -48,18 +48,18 @@ public class Day7B {
         number = parser4.parseCode();
         IntcodeParser parser5 = new IntcodeParser(input, e, number);
         number = parser5.parseCode();
-        parser.setSecondinput(number);
+        parser.changeSecondInput(number);
         while (!parser5.hasStopped()) {
             number = parser.parseCode();
-            parser2.setSecondinput(number);
+            parser2.changeSecondInput(number);
             number = parser2.parseCode();
-            parser3.setSecondinput(number);
+            parser3.changeSecondInput(number);
             number = parser3.parseCode();
-            parser4.setSecondinput(number);
+            parser4.changeSecondInput(number);
             number = parser4.parseCode();
-            parser5.setSecondinput(number);
+            parser5.changeSecondInput(number);
             number = parser5.parseCode();
-            parser.setSecondinput(number);
+            parser.changeSecondInput(number);
             if (number > max) {
                 max = number;
             }
