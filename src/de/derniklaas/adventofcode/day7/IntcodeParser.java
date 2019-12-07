@@ -2,16 +2,23 @@ package de.derniklaas.adventofcode.day7;
 
 public class IntcodeParser {
 
-    private String input;
+    private String[] parts;
     private boolean stopped = false;
+    private int firstinput = 0;
+    private int secondinput = 0;
+    private int position = 0;
 
-    public IntcodeParser(String input) {
-        this.input = input;
+    public IntcodeParser(String input, int firstinput, int secondinput) {
+        parts = input.split(",");
+        this.firstinput = firstinput;
+        this.secondinput = secondinput;
     }
 
-    public int parseCode(int firstinput, int secondinput) {
-        String[] parts = input.split(",");
-        int position = 0;
+    public void setSecondinput(int secondinput) {
+        this.firstinput = secondinput;
+    }
+
+    public int parseCode() {
         String opcode = parts[position];
         boolean checked = false;
         while (!opcode.equalsIgnoreCase("99")) {
@@ -41,14 +48,20 @@ public class IntcodeParser {
                         if (!checked) {
                             parts[output] = firstinput + "";
                             checked = true;
-                        } else parts[output] = secondinput + "";
+                            //System.out.println("Input (first): " + firstinput + " to " + output);
+                        } else {
+                            parts[output] = secondinput + "";
+                            //System.out.println("Input (second): " + secondinput + " to " + output);
+                        }
+
                         position += 2;
-                        //System.out.println("Input: " + s + " to " + output);
+
                         break;
                     }
                     case "4": {
                         int output = Integer.parseInt(parts[position + 1]);
                         //System.out.println();
+                        position += 2;
                         return Integer.parseInt(parts[output]);
                     }
                     case "5": {
