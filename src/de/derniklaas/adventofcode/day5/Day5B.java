@@ -9,8 +9,6 @@ public class Day5B {
 
     public static void main(String[] args) {
         String[] parts = input.split(",");
-        parts[1] = "12";
-        parts[2] = "2";
         parts = input.split(",");
         int position = 0;
         String opcode = parts[position];
@@ -41,7 +39,7 @@ public class Day5B {
                         Scanner in = new Scanner(System.in);
                         String s = in.nextLine();
                         parts[output] = s + "";
-                        position = +2;
+                        position += 2;
                         System.out.println("Input: " + s + " to " + output);
                         break;
                     }

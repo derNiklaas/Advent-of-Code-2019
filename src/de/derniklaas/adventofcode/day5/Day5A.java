@@ -9,8 +9,6 @@ public class Day5A {
 
     public static void main(String[] args) {
         String[] parts = input.split(",");
-        parts[1] = "12";
-        parts[2] = "2";
         parts = input.split(",");
         int position = 0;
         String opcode = parts[position];
