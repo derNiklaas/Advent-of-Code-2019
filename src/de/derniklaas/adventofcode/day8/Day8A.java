@@ -6,13 +6,13 @@ public class Day8A {
     //private static String input = "123456789012";
 
     private static int width = 25;
-    private static int hight = 6;
+    private static int height = 6;
 
     public static void main(String[] args) {
         String minLayer = "";
-        int amount = 1000;
-        for (int i = 0; i < input.length() / (width * hight); i++) {
-            String layer = input.substring(i * (width * hight), i * (width * hight) + (width * hight));
+        int amount = width * height +1;
+        for (int i = 0; i < input.length() / (width * height); i++) {
+            String layer = input.substring(i * (width * height), i * (width * height) + (width * height));
             char[] digits = layer.toCharArray();
             int zeros = 0;
             for (char c : digits) {
