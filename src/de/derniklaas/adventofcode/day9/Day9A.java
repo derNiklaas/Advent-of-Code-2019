@@ -111,7 +111,7 @@ public class Day9A {
                         break;
                     }
                     case "9": {
-                        int numb1 = getAddress(0, position + 1);
+                        long numb1 = getValue(0, position + 1);
                         relBase += numb1;
                         System.out.println("move relBase (Normal): Changed to " + relBase);
                         position += 2;
