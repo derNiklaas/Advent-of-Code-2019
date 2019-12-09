@@ -31,7 +31,7 @@ public class IntcodeComputer {
                     int output = getAddress(mode3, position + 3);
                     parts[output] = numb2 + numb1;
                     position += 4;
-                    System.out.printf("Addition [%d %d %d]: %d + %d = %d to \n", mode1, mode2, mode3, numb1, numb2, numb1 + numb2, output);
+                    System.out.printf("Addition [%d %d %d]: %d + %d = %d to %d\n", mode1, mode2, mode3, numb1, numb2, numb1 + numb2, output);
                     break;
                 }
                 case '2': {
