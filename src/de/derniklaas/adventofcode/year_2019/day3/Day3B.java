@@ -1,6 +1,6 @@
 package de.derniklaas.adventofcode.year_2019.day3;
 
-import de.derniklaas.adventofcode.year_2019.day1.day3.test.Grid;
+import de.derniklaas.adventofcode.year_2019.day3.test.Grid;
 
 public class Day3B {
 
