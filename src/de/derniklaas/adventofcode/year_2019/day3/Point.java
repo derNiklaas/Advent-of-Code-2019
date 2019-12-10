@@ -1,4 +1,4 @@
-package de.derniklaas.adventofcode.year_2019.day1.day3;
+package de.derniklaas.adventofcode.year_2019.day3;
 
 public class Point {
 

@@ -1,4 +1,4 @@
-package de.derniklaas.adventofcode.year_2019.day1.day10;
+package de.derniklaas.adventofcode.year_2019.day10;
 
 import java.util.Objects;
 

@@ -1,4 +1,4 @@
-package de.derniklaas.adventofcode.year_2019.day1.day2;
+package de.derniklaas.adventofcode.year_2019.day2;
 
 import de.derniklaas.adventofcode.year_2019.day1.IntcodeComputer;
 

@@ -1,4 +1,4 @@
-package de.derniklaas.adventofcode.year_2019.day1.day8;
+package de.derniklaas.adventofcode.year_2019.day8;
 
 public class Day8A {
 

@@ -1,4 +1,4 @@
-package de.derniklaas.adventofcode.year_2019.day1.day3.test;
+package de.derniklaas.adventofcode.year_2019.day3.test;
 
 public class Wire {
     /**

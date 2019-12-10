@@ -1,4 +1,4 @@
-package de.derniklaas.adventofcode.year_2019.day1.day7;
+package de.derniklaas.adventofcode.year_2019.day7;
 
 public class IntcodeParser {
 
