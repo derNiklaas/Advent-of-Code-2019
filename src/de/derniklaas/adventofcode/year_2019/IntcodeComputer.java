@@ -1,6 +1,8 @@
-package de.derniklaas.adventofcode.year_2019.day1;
+package de.derniklaas.adventofcode.year_2019;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
 
 public class IntcodeComputer {
@@ -8,17 +10,26 @@ public class IntcodeComputer {
     private long[] parts = new long[10000];
     private int relBase = 0;
     private String input;
+    private List<Long> outputs = new ArrayList<>();
+    private boolean stopped = false;
+    private boolean pauseOnInput = false;
+    private int inputNumber = 0;
+    private int position = 0;
 
     public IntcodeComputer(String input) {
+        this(input, false);
+    }
+
+    public IntcodeComputer(String input, boolean pauseOnInput) {
         String[] temp = input.split(",");
         Arrays.fill(parts, 0);
         for (int i = 0; i < temp.length; i++) {
             parts[i] = Long.parseLong(temp[i]);
         }
+        this.pauseOnInput = pauseOnInput;
     }
 
     public void compute() {
-        int position = 0;
         String opcode = parts[position] + "";
         while (!opcode.equalsIgnoreCase("99")) {
             int mode1 = parseNumber(opcode, opcode.length() - 3);
@@ -44,17 +55,24 @@ public class IntcodeComputer {
                     break;
                 }
                 case '3': {
+                    if (pauseOnInput && inputNumber == -100) return;
                     int output = getAddress(mode1, position + 1);
-                    System.out.println("Enter a number: ");
-                    Scanner in = new Scanner(System.in);
-                    long value = Long.parseLong(in.next());
-                    parts[output] = value;
+                    if (!pauseOnInput) {
+                        System.out.println("Enter a number: ");
+                        Scanner in = new Scanner(System.in);
+                        long value = Long.parseLong(in.next());
+                        parts[output] = value;
+                    } else {
+                        parts[output] = inputNumber;
+                        inputNumber = -100;
+                    }
                     position += 2;
-                    System.out.printf("Input [%d]: Changed %d to %d \n", mode1, output, value);
+                    System.out.printf("Input [%d]: Changed %d to %d \n", mode1, output, parts[output]);
                     break;
                 }
                 case '4': {
                     long output = getValue(mode1, position + 1);
+                    outputs.add(output);
                     System.out.printf("Output [%d]: %d \n", mode1, output);
                     position += 2;
                     break;
@@ -120,6 +138,7 @@ public class IntcodeComputer {
             }
             opcode = parts[position] + "";
         }
+        stopped = true;
     }
 
     private long getValue(int mode, int position) {
@@ -142,5 +161,17 @@ public class IntcodeComputer {
 
     public long[] getParts() {
         return parts;
+    }
+
+    public List<Long> getOutputs() {
+        return outputs;
+    }
+
+    public void setInputNumber(int inputNumber) {
+        this.inputNumber = inputNumber;
+    }
+
+    public boolean hasStopped() {
+        return stopped;
     }
 }

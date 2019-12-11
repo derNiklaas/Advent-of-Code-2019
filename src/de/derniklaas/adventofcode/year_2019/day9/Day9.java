@@ -1,6 +1,6 @@
 package de.derniklaas.adventofcode.year_2019.day9;
 
-import de.derniklaas.adventofcode.year_2019.day1.IntcodeComputer;
+import de.derniklaas.adventofcode.year_2019.IntcodeComputer;
 
 public class Day9 {
 
