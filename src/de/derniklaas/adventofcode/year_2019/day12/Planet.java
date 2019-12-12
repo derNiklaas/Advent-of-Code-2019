@@ -2,13 +2,11 @@ package de.derniklaas.adventofcode.year_2019.day12;
 
 public class Planet {
 
-    private int x, y, z;
+    private Position3D positon;
     private int velocityX, velocityY, velocityZ;
 
     public Planet(int x, int y, int z, int velocityX, int velocityY, int velocityZ) {
-        this.x = x;
-        this.y = y;
-        this.z = z;
+        positon = new Position3D(x, y, z);
         this.velocityX = velocityX;
         this.velocityY = velocityY;
         this.velocityZ = velocityZ;
@@ -25,13 +23,13 @@ public class Planet {
     }
 
     public void tick() {
-        this.x += velocityX;
-        this.y += velocityY;
-        this.z += velocityZ;
+        this.positon.setX(positon.getX() + velocityX);
+        this.positon.setY(positon.getY() + velocityY);
+        this.positon.setZ(positon.getZ() + velocityZ);
     }
 
     public int getPotentialEnergy() {
-        return Math.abs(x) + Math.abs(y) + Math.abs(z);
+        return Math.abs(positon.getX()) + Math.abs(positon.getY()) + Math.abs(positon.getZ());
     }
 
     public int getKinecticEnergy() {
@@ -43,15 +41,19 @@ public class Planet {
     }
 
     public int getX() {
-        return x;
+        return positon.getX();
     }
 
     public int getY() {
-        return y;
+        return positon.getY();
     }
 
     public int getZ() {
-        return z;
+        return positon.getZ();
+    }
+
+    public Position3D getPositon() {
+        return positon;
     }
 
     public int getVelocityZ() {
