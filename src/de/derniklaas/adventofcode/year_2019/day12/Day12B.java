@@ -37,6 +37,9 @@ public class Day12B {
         Planet[] planets = new Planet[]{io, europa, ganymede, callisto};
 
         long steps = 0;
+        int xSteps = -1;
+        int ySteps = -1;
+        int zSteps = -1;
         while (true) {
             steps++;
             System.out.printf("--- Step %d ---\n", steps);
@@ -56,19 +59,34 @@ public class Day12B {
                 planet.tick();
                 //System.out.printf("%d %d %d | %d %d %d\n", planet.getX(), planet.getY(), planet.getZ(), planet.getVelocityX(), planet.getVelocityY(), planet.getVelocityZ());
             }
-            int matches = 0;
+            int matchesX = 0, matchesY = 0, matchesZ = 0;
             for (int i = 0; i < startingPositions.length; i++) {
-                if (planets[i].getPositon().equals(startingPositions[i])) {
-                    if (planets[i].getVelocityX() == 0 && planets[i].getVelocityY() == 0 && planets[i].getVelocityZ() == 0) {
-                        matches++;
-                    }
+                if (planets[i].getVelocityX() == 0 && planets[i].getPositon().getX() == startingPositions[i].getX()) {
+                    matchesX++;
+                }
+                if (planets[i].getVelocityY() == 0 && planets[i].getPositon().getY() == startingPositions[i].getY()) {
+                    matchesY++;
+                }
+                if (planets[i].getVelocityZ() == 0 && planets[i].getPositon().getZ() == startingPositions[i].getZ()) {
+                    matchesZ++;
                 }
             }
-            if (matches == 4) {
-                System.out.printf("You need %d steps\n", steps);
-                return;
+            if (matchesX == 4) {
+                if (xSteps == -1) xSteps = (int) steps;
+            }
+            if (matchesY == 4) {
+                if (ySteps == -1) ySteps = (int) steps;
+            }
+            if (matchesZ == 4) {
+                if (zSteps == -1) zSteps = (int) steps;
+            }
+            if (zSteps != -1 && xSteps != -1 && ySteps != -1) {
+                break;
             }
         }
+        System.out.printf("Steps for cycle: X %d Y %d Z %d \n", xSteps, ySteps, zSteps);
+        long output = lcm(lcm(xSteps, ySteps), zSteps);
+        System.out.printf("Output is %d \n", output);
     }
 
     /**
@@ -78,5 +96,14 @@ public class Day12B {
      */
     private static int getVelocityChange(int number1, int number2) {
         return Integer.compare(number2, number1);
+    }
+
+    private static long lcm(long a, long b) {
+        return (a * b) / gcd(a, b);
+    }
+
+    private static long gcd(long a, long b) {
+        if (a == 0) return b;
+        return gcd(b % a, a);
     }
 }
