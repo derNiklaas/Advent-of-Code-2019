@@ -82,8 +82,8 @@ public class IntcodeComputer {
                     outputs.add(output);
                     System.out.printf("Output [%d]: %d \n", mode1, output);
                     position += 2;
+                    this.output = output;
                     if (pauseOnOutput) {
-                        this.output = output;
                         return;
                     }
                     break;

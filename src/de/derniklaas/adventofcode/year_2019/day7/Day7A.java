@@ -1,5 +1,7 @@
 package de.derniklaas.adventofcode.year_2019.day7;
 
+import de.derniklaas.adventofcode.year_2019.IntcodeComputer;
+
 public class Day7A {
 
     //private static String input = "3,23,3,24,1002,24,10,24,1002,23,-1,23,101,5,23,23,1,24,23,23,4,23,99,0,0";
@@ -35,16 +37,36 @@ public class Day7A {
     }
 
     private static int getMax(int a, int b, int c, int d, int e) {
-        IntcodeParser parser = new IntcodeParser(input, a, 0);
-        int number = 0;
-        number = parser.parseCode();
-        parser = new IntcodeParser(input, b, number);
-        number = parser.parseCode();
-        parser = new IntcodeParser(input, c, number);
-        number = parser.parseCode();
-        parser = new IntcodeParser(input, d, number);
-        number = parser.parseCode();
-        parser = new IntcodeParser(input, e, number);
-        return parser.parseCode();
+        IntcodeComputer computer = new IntcodeComputer(input, true, false);
+        computer.setInputNumber(a);
+        computer.compute();
+        computer.setInputNumber(0);
+        computer.compute();
+        int output = (int) computer.getOutput();
+        computer = new IntcodeComputer(input, true, false);
+        computer.setInputNumber(b);
+        computer.compute();
+        computer.setInputNumber(output);
+        computer.compute();
+        output = (int) computer.getOutput();
+        computer = new IntcodeComputer(input, true, false);
+        computer.setInputNumber(c);
+        computer.compute();
+        computer.setInputNumber(output);
+        computer.compute();
+        output = (int) computer.getOutput();
+        computer = new IntcodeComputer(input, true, false);
+        computer.setInputNumber(d);
+        computer.compute();
+        computer.setInputNumber(output);
+        computer.compute();
+        output = (int) computer.getOutput();
+        computer = new IntcodeComputer(input, true, false);
+        computer.setInputNumber(e);
+        computer.compute();
+        computer.setInputNumber(output);
+        computer.compute();
+        return (int) computer.getOutput();
+
     }
 }

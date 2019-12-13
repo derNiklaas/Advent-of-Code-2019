@@ -1,5 +1,7 @@
 package de.derniklaas.adventofcode.year_2019.day7;
 
+import de.derniklaas.adventofcode.year_2019.IntcodeComputer;
+
 public class Day7B {
     //private static String input = "3,26,1001,26,-4,26,3,27,1002,27,2,27,1,27,26,27,4,27,1001,28,-1,28,1005,28,6,99,0,0,5";
     private static String input = "3,8,1001,8,10,8,105,1,0,0,21,34,51,64,73,98,179,260,341,422,99999,3,9,102,4,9,9,1001,9,4,9,4,9,99,3,9,1001,9,4,9,1002,9,3,9,1001,9,5,9,4,9,99,3,9,101,5,9,9,102,5,9,9,4,9,99,3,9,101,5,9,9,4,9,99,3,9,1002,9,5,9,1001,9,3,9,102,2,9,9,101,5,9,9,1002,9,2,9,4,9,99,3,9,1001,9,1,9,4,9,3,9,1002,9,2,9,4,9,3,9,1001,9,2,9,4,9,3,9,1001,9,2,9,4,9,3,9,102,2,9,9,4,9,3,9,102,2,9,9,4,9,3,9,101,1,9,9,4,9,3,9,101,1,9,9,4,9,3,9,102,2,9,9,4,9,3,9,101,2,9,9,4,9,99,3,9,101,1,9,9,4,9,3,9,1001,9,1,9,4,9,3,9,102,2,9,9,4,9,3,9,102,2,9,9,4,9,3,9,101,2,9,9,4,9,3,9,101,1,9,9,4,9,3,9,101,1,9,9,4,9,3,9,1002,9,2,9,4,9,3,9,1002,9,2,9,4,9,3,9,1001,9,2,9,4,9,99,3,9,101,2,9,9,4,9,3,9,102,2,9,9,4,9,3,9,1001,9,2,9,4,9,3,9,1001,9,2,9,4,9,3,9,1001,9,2,9,4,9,3,9,101,2,9,9,4,9,3,9,1001,9,1,9,4,9,3,9,102,2,9,9,4,9,3,9,102,2,9,9,4,9,3,9,101,2,9,9,4,9,99,3,9,1002,9,2,9,4,9,3,9,102,2,9,9,4,9,3,9,1001,9,2,9,4,9,3,9,1002,9,2,9,4,9,3,9,1001,9,2,9,4,9,3,9,1002,9,2,9,4,9,3,9,102,2,9,9,4,9,3,9,102,2,9,9,4,9,3,9,101,2,9,9,4,9,3,9,1001,9,2,9,4,9,99,3,9,1001,9,1,9,4,9,3,9,101,1,9,9,4,9,3,9,1002,9,2,9,4,9,3,9,1001,9,2,9,4,9,3,9,1001,9,1,9,4,9,3,9,101,1,9,9,4,9,3,9,102,2,9,9,4,9,3,9,1001,9,2,9,4,9,3,9,1002,9,2,9,4,9,3,9,1001,9,2,9,4,9,99";
@@ -38,28 +40,53 @@ public class Day7B {
     private static int getMax(int a, int b, int c, int d, int e) {
         int number = 0;
         int max = 0;
-        IntcodeParser parser = new IntcodeParser(input, a, 0);
-        number = parser.parseCode();
-        IntcodeParser parser2 = new IntcodeParser(input, b, number);
-        number = parser2.parseCode();
-        IntcodeParser parser3 = new IntcodeParser(input, c, number);
-        number = parser3.parseCode();
-        IntcodeParser parser4 = new IntcodeParser(input, d, number);
-        number = parser4.parseCode();
-        IntcodeParser parser5 = new IntcodeParser(input, e, number);
-        number = parser5.parseCode();
-        parser.changeSecondInput(number);
-        while (!parser5.hasStopped()) {
-            number = parser.parseCode();
-            parser2.changeSecondInput(number);
-            number = parser2.parseCode();
-            parser3.changeSecondInput(number);
-            number = parser3.parseCode();
-            parser4.changeSecondInput(number);
-            number = parser4.parseCode();
-            parser5.changeSecondInput(number);
-            number = parser5.parseCode();
-            parser.changeSecondInput(number);
+        IntcodeComputer computer = new IntcodeComputer(input, true, false);
+        computer.setInputNumber(a);
+        computer.compute();
+        computer.setInputNumber(0);
+        computer.compute();
+        int output = (int) computer.getOutput();
+        IntcodeComputer computer2 = new IntcodeComputer(input, true, false);
+        computer2.setInputNumber(b);
+        computer2.compute();
+        computer2.setInputNumber(output);
+        computer2.compute();
+        output = (int) computer2.getOutput();
+        IntcodeComputer computer3 = new IntcodeComputer(input, true, false);
+        computer3.setInputNumber(c);
+        computer3.compute();
+        computer3.setInputNumber(output);
+        computer3.compute();
+        output = (int) computer3.getOutput();
+        IntcodeComputer computer4 = new IntcodeComputer(input, true, false);
+        computer4.setInputNumber(d);
+        computer4.compute();
+        computer4.setInputNumber(output);
+        computer4.compute();
+        output = (int) computer4.getOutput();
+        IntcodeComputer computer5 = new IntcodeComputer(input, true, false);
+        computer5.setInputNumber(e);
+        computer5.compute();
+        computer5.setInputNumber(output);
+        computer5.compute();
+        number = (int) computer5.getOutput();
+        computer.setInputNumber(number);
+        while (!computer5.hasStopped()) {
+            computer.compute();
+            number = (int) computer.getOutput();
+            computer2.setInputNumber(number);
+            computer2.compute();
+            number = (int) computer2.getOutput();
+            computer3.setInputNumber(number);
+            computer3.compute();
+            number = (int) computer3.getOutput();
+            computer4.setInputNumber(number);
+            computer4.compute();
+            number = (int) computer4.getOutput();
+            computer5.setInputNumber(number);
+            computer5.compute();
+            number = (int) computer5.getOutput();
+            computer.setInputNumber(number);
             if (number > max) {
                 max = number;
             }
