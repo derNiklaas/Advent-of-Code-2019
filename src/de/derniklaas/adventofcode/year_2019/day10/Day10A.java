@@ -1,5 +1,7 @@
 package de.derniklaas.adventofcode.year_2019.day10;
 
+import de.derniklaas.adventofcode.year_2019.Position;
+
 import java.util.ArrayList;
 
 public class Day10A {

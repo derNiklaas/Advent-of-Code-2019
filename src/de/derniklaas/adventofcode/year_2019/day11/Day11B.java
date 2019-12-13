@@ -1,7 +1,7 @@
 package de.derniklaas.adventofcode.year_2019.day11;
 
 import de.derniklaas.adventofcode.year_2019.IntcodeComputer;
-import de.derniklaas.adventofcode.year_2019.day10.Position;
+import de.derniklaas.adventofcode.year_2019.Position;
 
 import java.util.ArrayList;
 import java.util.List;
