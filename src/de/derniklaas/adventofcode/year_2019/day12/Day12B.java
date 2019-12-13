@@ -64,7 +64,7 @@ public class Day12B {
         }
         System.out.printf("Steps for cycle: X %d Y %d Z %d \n", xSteps, ySteps, zSteps);
         long output = lcm(lcm(xSteps, ySteps), zSteps);
-        System.out.printf("[Day 12/B] It needs %d stesp to reset the universe. \n", output);
+        System.out.printf("[Day 12/B] It needs %d steps to reset the universe. \n", output);
     }
 
     /**
