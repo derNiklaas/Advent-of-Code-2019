@@ -13,20 +13,27 @@ public class IntcodeComputer {
     private List<Long> outputs = new ArrayList<>();
     private boolean stopped = false;
     private boolean pauseOnInput = false;
+    private boolean pauseOnOutput = false;
     private int inputNumber = 0;
     private int position = 0;
+    private long output = 0;
 
     public IntcodeComputer(String input) {
         this(input, false);
     }
 
     public IntcodeComputer(String input, boolean pauseOnInput) {
+        this(input, pauseOnInput, false);
+    }
+
+    public IntcodeComputer(String input, boolean pauseOnInput, boolean pauseOnOutput) {
         String[] temp = input.split(",");
         Arrays.fill(parts, 0);
         for (int i = 0; i < temp.length; i++) {
             parts[i] = Long.parseLong(temp[i]);
         }
         this.pauseOnInput = pauseOnInput;
+        this.pauseOnOutput = pauseOnOutput;
     }
 
     public void compute() {
@@ -75,6 +82,10 @@ public class IntcodeComputer {
                     outputs.add(output);
                     System.out.printf("Output [%d]: %d \n", mode1, output);
                     position += 2;
+                    if (pauseOnOutput) {
+                        this.output = output;
+                        return;
+                    }
                     break;
                 }
                 case '5': {
@@ -173,5 +184,9 @@ public class IntcodeComputer {
 
     public boolean hasStopped() {
         return stopped;
+    }
+
+    public long getOutput() {
+        return output;
     }
 }
