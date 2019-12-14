@@ -39,7 +39,7 @@ public class Day14B {
             oreLeft -= getRecipe("FUEL", 1);
             amount++;
         }
-        System.out.printf("[Day 14/B] You can make %d fule with 1T ore. \n", amount - 1);
+        System.out.printf("[Day 14/B] You can make %d fuel with 1T ore. \n", amount - 1);
     }
 
     public static int getRecipe(String name, long amount) {
