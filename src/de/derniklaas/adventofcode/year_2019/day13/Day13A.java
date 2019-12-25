@@ -13,7 +13,7 @@ public class Day13A {
     public static void main(String[] args) {
         IntcodeComputer computer = new IntcodeComputer(input, false, true);
         Map<Position, Integer> map = new HashMap<>();
-        while (!computer.hasStopped()) {
+        while (computer.isRunning()) {
             computer.compute();
             int x = (int) computer.getOutput();
             computer.compute();

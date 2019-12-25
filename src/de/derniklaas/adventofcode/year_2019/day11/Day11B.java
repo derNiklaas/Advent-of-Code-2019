@@ -17,7 +17,7 @@ public class Day11B {
         int outputPosition = 0;
         ArrayList<Position> white = new ArrayList<>();
         int color = 0, directions = 0, x = 0, y = 0;
-        while (!computer.hasStopped()) {
+        while (computer.isRunning()) {
             List<Long> outputs = computer.getOutputs();
             for (; outputPosition < outputs.size(); outputPosition += 2) {
                 color = Integer.parseInt(outputs.get(outputPosition) + "");
@@ -73,8 +73,8 @@ public class Day11B {
             if (maxY < pos.getY()) maxY = pos.getY();
         }
 
-        for (int i = minX; i < maxX + 1; i++) {
-            for (int j = minY; j < maxY + 1; j++) {
+        for (int j = minY; j < maxY + 1; j++) {
+            for (int i = maxX; i > minX - 1; i--) {
                 Position pos = new Position(i, j);
                 if (white.contains(pos)) {
                     System.out.print("\u2588");
@@ -84,7 +84,5 @@ public class Day11B {
             }
             System.out.print("\n");
         }
-        System.out.println("Due to some failures you should take a screenshot of it and rotate it 90°... or just tilt your head... :shurg:");
     }
-
 }

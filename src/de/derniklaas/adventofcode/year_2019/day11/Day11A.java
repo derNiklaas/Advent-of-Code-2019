@@ -18,7 +18,7 @@ public class Day11A {
         int outputPosition = 0;
         ArrayList<Position> white = new ArrayList<>();
         int color = 0, directions = 0, x = 0, y = 0;
-        while (!computer.hasStopped()) {
+        while (computer.isRunning()) {
             List<Long> outputs = computer.getOutputs();
             for (; outputPosition < outputs.size(); outputPosition += 2) {
                 color = Integer.parseInt(outputs.get(outputPosition) + "");

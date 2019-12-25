@@ -71,7 +71,7 @@ public class Day7B {
         computer5.compute();
         number = (int) computer5.getOutput();
         computer.setInputNumber(number);
-        while (!computer5.hasStopped()) {
+        while (computer5.isRunning()) {
             computer.compute();
             number = (int) computer.getOutput();
             computer2.setInputNumber(number);

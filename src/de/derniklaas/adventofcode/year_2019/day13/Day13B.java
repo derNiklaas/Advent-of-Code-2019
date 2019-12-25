@@ -17,7 +17,7 @@ public class Day13B {
         int ballX = 0;
         int paddleX = 0;
         Map<Position, Integer> map = new HashMap<>();
-        while (!computer.hasStopped()) {
+        while (computer.isRunning()) {
             computer.compute();
             int x = (int) computer.getOutput();
             computer.compute();

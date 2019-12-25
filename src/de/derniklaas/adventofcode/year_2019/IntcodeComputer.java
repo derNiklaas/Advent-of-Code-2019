@@ -11,9 +11,10 @@ public class IntcodeComputer {
     private int relBase = 0;
     private String input;
     private List<Long> outputs = new ArrayList<>();
-    private boolean stopped = false;
-    private boolean pauseOnInput = false;
-    private boolean pauseOnOutput = false;
+    private boolean running = true;
+    private boolean pauseOnInput;
+    private boolean pauseOnOutput;
+    private boolean debug;
     private int inputNumber = 0;
     private int position = 0;
     private long output = 0;
@@ -27,6 +28,10 @@ public class IntcodeComputer {
     }
 
     public IntcodeComputer(String input, boolean pauseOnInput, boolean pauseOnOutput) {
+        this(input, pauseOnInput, pauseOnOutput, false);
+    }
+
+    public IntcodeComputer(String input, boolean pauseOnInput, boolean pauseOnOutput, boolean debug) {
         String[] temp = input.split(",");
         Arrays.fill(parts, 0);
         for (int i = 0; i < temp.length; i++) {
@@ -34,6 +39,7 @@ public class IntcodeComputer {
         }
         this.pauseOnInput = pauseOnInput;
         this.pauseOnOutput = pauseOnOutput;
+        this.debug = debug;
     }
 
     public void compute() {
@@ -49,7 +55,8 @@ public class IntcodeComputer {
                     int output = getAddress(mode3, position + 3);
                     parts[output] = numb2 + numb1;
                     position += 4;
-                    System.out.printf("Addition [%d %d %d]: %d + %d = %d to %d\n", mode1, mode2, mode3, numb1, numb2, numb1 + numb2, output);
+                    if (debug)
+                        System.out.printf("Addition [%d %d %d]: %d + %d = %d to %d\n", mode1, mode2, mode3, numb1, numb2, numb1 + numb2, output);
                     break;
                 }
                 case '2': {
@@ -58,7 +65,8 @@ public class IntcodeComputer {
                     int output = getAddress(mode3, position + 3);
                     parts[output] = numb2 * numb1;
                     position += 4;
-                    System.out.printf("Multiplication [%d %d %d]: %d * %d = %d to %d \n", mode1, mode2, mode3, numb1, numb2, numb1 * numb2, output);
+                    if (debug)
+                        System.out.printf("Multiplication [%d %d %d]: %d * %d = %d to %d \n", mode1, mode2, mode3, numb1, numb2, numb1 * numb2, output);
                     break;
                 }
                 case '3': {
@@ -74,13 +82,13 @@ public class IntcodeComputer {
                         inputNumber = -100;
                     }
                     position += 2;
-                    System.out.printf("Input [%d]: Changed %d to %d \n", mode1, output, parts[output]);
+                    if (debug) System.out.printf("Input [%d]: Changed %d to %d \n", mode1, output, parts[output]);
                     break;
                 }
                 case '4': {
                     long output = getValue(mode1, position + 1);
                     outputs.add(output);
-                    System.out.printf("Output [%d]: %d \n", mode1, output);
+                    if (debug) System.out.printf("Output [%d]: %d \n", mode1, output);
                     position += 2;
                     this.output = output;
                     if (pauseOnOutput) {
@@ -92,10 +100,12 @@ public class IntcodeComputer {
                     long condition = getValue(mode1, position + 1);
                     int output = (int) getValue(mode2, position + 2);
                     if (condition != 0L) {
-                        System.out.printf("Jump if true [%d %d]: %d -> Jumped to %d \n", mode1, mode2, condition, output);
+                        if (debug)
+                            System.out.printf("Jump if true [%d %d]: %d -> Jumped to %d \n", mode1, mode2, condition, output);
                         position = output;
                     } else {
-                        System.out.printf("Jump if true [%d %d]: %d -> Nothing happened \n", mode1, mode2, condition);
+                        if (debug)
+                            System.out.printf("Jump if true [%d %d]: %d -> Nothing happened \n", mode1, mode2, condition);
                         position += 3;
                     }
                     break;
@@ -104,10 +114,12 @@ public class IntcodeComputer {
                     long condition = getValue(mode1, position + 1);
                     int output = (int) getValue(mode2, position + 2);
                     if (condition == 0L) {
-                        System.out.printf("Jump if false [%d %d]: %d -> Jumped to %d \n", mode1, mode2, condition, output);
+                        if (debug)
+                            System.out.printf("Jump if false [%d %d]: %d -> Jumped to %d \n", mode1, mode2, condition, output);
                         position = output;
                     } else {
-                        System.out.printf("Jump if false [%d %d]: %d -> Nothing happened \n", mode1, mode2, condition);
+                        if (debug)
+                            System.out.printf("Jump if false [%d %d]: %d -> Nothing happened \n", mode1, mode2, condition);
                         position += 3;
                     }
                     break;
@@ -117,10 +129,12 @@ public class IntcodeComputer {
                     long numb2 = getValue(mode2, position + 2);
                     int output = getAddress(mode3, position + 3);
                     if (numb1 < numb2) {
-                        System.out.printf("less than [%d %d] %d < %d: Changed output to 1 \n", mode1, mode2, numb1, numb2);
+                        if (debug)
+                            System.out.printf("less than [%d %d] %d < %d: Changed output to 1 \n", mode1, mode2, numb1, numb2);
                         parts[output] = 1;
                     } else {
-                        System.out.printf("less than [%d %d] %d > %d: Changed output to 0 \n", mode1, mode2, numb1, numb2);
+                        if (debug)
+                            System.out.printf("less than [%d %d] %d > %d: Changed output to 0 \n", mode1, mode2, numb1, numb2);
                         parts[output] = 0;
                     }
                     position += 4;
@@ -131,10 +145,12 @@ public class IntcodeComputer {
                     long numb2 = getValue(mode2, position + 2);
                     int output = getAddress(mode3, position + 3);
                     if (numb1 == numb2) {
-                        System.out.printf("equals [%d %d] %d == %d: Changed output to 1 \n", mode1, mode2, numb1, numb2);
+                        if (debug)
+                            System.out.printf("equals [%d %d] %d == %d: Changed output to 1 \n", mode1, mode2, numb1, numb2);
                         parts[output] = 1;
                     } else {
-                        System.out.printf("equals [%d %d] %d != %d: Changed output to 0 \n", mode1, mode2, numb1, numb2);
+                        if (debug)
+                            System.out.printf("equals [%d %d] %d != %d: Changed output to 0 \n", mode1, mode2, numb1, numb2);
                         parts[output] = 0;
                     }
                     position += 4;
@@ -143,13 +159,13 @@ public class IntcodeComputer {
                 case '9': {
                     long numb = getValue(mode1, position + 1);
                     relBase += numb;
-                    System.out.printf("move relBase [%d]: Changed relBase to %d \n", mode1, relBase);
+                    if (debug) System.out.printf("move relBase [%d]: Changed relBase to %d \n", mode1, relBase);
                     position += 2;
                 }
             }
             opcode = parts[position] + "";
         }
-        stopped = true;
+        running = false;
     }
 
     private long getValue(int mode, int position) {
@@ -182,8 +198,8 @@ public class IntcodeComputer {
         this.inputNumber = inputNumber;
     }
 
-    public boolean hasStopped() {
-        return stopped;
+    public boolean isRunning() {
+        return running;
     }
 
     public long getOutput() {
